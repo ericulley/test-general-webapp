@@ -1,0 +1,16 @@
+  
+body {
+background-color: #eee;
+text-align: center;
+}
+
+nav {
+background-color: darkgray;
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+button {
+margin: 0 1em;
+}

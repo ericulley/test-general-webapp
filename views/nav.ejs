@@ -3,7 +3,9 @@
         <h4>Auth0</h4>
     </div>
     <div id="right-side">
-        <button>Log In</button>
-        <button>Log Out</button>
+        <% if (!isAuthenticated) { %>
+            <a href="/login"><button>Log In</button></a>
+        <% } %>
+        <a href="/logout"><button>Log Out</button></a>
     </div>
 </nav>
