@@ -25,13 +25,33 @@
         <% if (userInfo) { %> 
             <p>name: <%=userInfo.name%></p> 
             <p>email: <%=userInfo.email%></p>
-            <p>email_verified: <%=userInfo.email_verified%></p>
-            <p>sub: <%=userInfo.sub%></p>
         <%
         } else {
-            %> <p></p> <%
+            %> <p>None</p> <%
         } %>
-        
+
+        <h3>idToken</h3>
+    
+        <% if (idToken) { %> 
+            <p>aud: <%=idToken.aud%></p> 
+            <p>email: <%=idToken.email_verified%></p> 
+            <p>email_verified: <%=idToken.email%></p> 
+            <p>exp: <%=idToken.exp%></p> 
+            <p>iat: <%=idToken.iat%></p> 
+            <p>iss: <%=idToken.iss%></p> 
+            <p>name: <%=idToken.name%></p> 
+            <p>nickname: <%=idToken.nickname%></p> 
+            <p>nonce: <%=idToken.nonce%></p> 
+            <p>picture: <%=idToken.picture%></p> 
+            <p>sub: <%=idToken.sub%></p> 
+            <p>updated_at: <%=idToken.updated_at%></p> 
+        <%
+        } else {
+            %> <p>None</p> <%
+        } %>
+
+        <h3>Request Protected Data</h3>
+        <a href="/requires-auth"><button>Protected Endpoint</button></a>
     </main>
     
 </body>
