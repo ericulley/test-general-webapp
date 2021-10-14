@@ -8,8 +8,10 @@ const app = express()
 dotenv.config()
 const PORT = process.env.PORT
 const DOMAIN = process.env.AUTH0_DOMAIN
+const C_DOMAIN = process.env.AUTH0_C_DOMAIN
 const CLIENT_ID = process.env.AUTH0_CLIENT_ID
 const CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET
+const SECRET = process.env.AUTH0_SECRET
 
 
 // Auth Config
@@ -18,8 +20,14 @@ const authConfig = {
     auth0Logout: true,
     baseURL: 'http://localhost:3000',
     clientID: `${CLIENT_ID}`,
-    issuerBaseURL: `https://${DOMAIN}`,
-    secret: `${CLIENT_SECRET}`
+    clientSecret: `${CLIENT_SECRET}`,
+    secret: `${SECRET}`,
+    issuerBaseURL: `https://${C_DOMAIN}`,
+    authorizationParams: {
+      response_type: 'code id_token',
+      audience: `https://${DOMAIN}/api/v2/`,
+      scope: 'openid profile email read:secret',
+    }
   };
   
 

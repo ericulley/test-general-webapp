@@ -34,8 +34,8 @@
     
         <% if (idToken) { %> 
             <p>aud: <%=idToken.aud%></p> 
-            <p>email: <%=idToken.email_verified%></p> 
-            <p>email_verified: <%=idToken.email%></p> 
+            <p>email: <%=idToken.email%></p> 
+            <p>email_verified: <%=idToken.email_verified%></p> 
             <p>exp: <%=idToken.exp%></p> 
             <p>iat: <%=idToken.iat%></p> 
             <p>iss: <%=idToken.iss%></p> 
@@ -52,6 +52,9 @@
 
         <h3>Request Protected Data</h3>
         <a href="/requires-auth"><button>Protected Endpoint</button></a>
+
+        <h3>Request to Management API</h3>
+        <a href="/mgmt-api"><button>Use Access Token</button></a>
     </main>
     
 </body>
