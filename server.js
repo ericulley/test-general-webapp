@@ -2,6 +2,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const { auth } = require('express-openid-connect');
+const jose = require('jose');
 
 // Config
 const app = express()
@@ -17,17 +18,32 @@ const SECRET = process.env.AUTH0_SECRET
 // Auth Config
 const authConfig = {
     authRequired: false,
-    auth0Logout: true,
-    baseURL: 'http://localhost:3000',
+    baseURL: `http://localhost:${PORT}`,
     clientID: `${CLIENT_ID}`,
     clientSecret: `${CLIENT_SECRET}`,
     secret: `${SECRET}`,
     issuerBaseURL: `https://${C_DOMAIN}`,
+    // auth0Logout: true, 
+    // idpLogout: true,
     authorizationParams: {
-      response_type: 'code id_token',
-      audience: `https://${DOMAIN}/api/v2/`,
-      scope: 'openid profile email read:secret',
-    }
+      response_type: 'code',
+      audience: `test-general-nodeAPI`,
+      scope: 'openid email profile offline_access read:users',
+    },
+    routes: {
+      login: false,
+      // callback: '/callback'
+    }, 
+    session: {
+      name: 'apple',
+      absoluteDuration: 3,
+      rollingDuration: 3
+    }, 
+    afterCallback: (req, res, session) => {
+        const claims = jose.decodeJwt(session.id_token); // using jose library to decode JWT
+        console.log("CLAIMS: ", claims);
+        return session;
+      }
   };
   
 
