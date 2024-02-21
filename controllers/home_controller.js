@@ -43,11 +43,13 @@ home.get('/login', (req, res) => {
             connection: req.query.connection
         })
     }
-    const {
+    if (req.query.organization) {
+        const {
         organization,
         organization_name,
         invitation,
-    } = req.query
+        } = req.query
+    }
     return res.oidc.login({
         returnTo: 'http://localhost:4000',
         authorizationParams: {
@@ -58,7 +60,7 @@ home.get('/login', (req, res) => {
 
 // home.get('/logout', (req, res) => {
 //     return res.oidc.logout({
-//         federated: true
+//         // federated: true
 //     })
 // })
 

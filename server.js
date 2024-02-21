@@ -13,38 +13,39 @@ const C_DOMAIN = process.env.AUTH0_C_DOMAIN
 const CLIENT_ID = process.env.AUTH0_CLIENT_ID
 const CLIENT_SECRET = process.env.AUTH0_CLIENT_SECRET
 const SECRET = process.env.AUTH0_SECRET
-
+console.log("Custom Domain: ", C_DOMAIN);
 
 // Auth Config
 const authConfig = {
-    authRequired: false,
-    baseURL: `http://localhost:${PORT}`,
-    clientID: `${CLIENT_ID}`,
-    clientSecret: `${CLIENT_SECRET}`,
-    secret: `${SECRET}`,
-    issuerBaseURL: `https://${C_DOMAIN}`,
-    // auth0Logout: true, 
-    // idpLogout: true,
-    authorizationParams: {
-      response_type: 'code',
-      audience: `test-general-nodeAPI`,
-      scope: 'openid email profile offline_access read:users',
-    },
-    routes: {
-      login: false,
-      // callback: '/callback'
-    }, 
-    session: {
-      name: 'apple',
-      absoluteDuration: 3,
-      rollingDuration: 3
-    }, 
-    afterCallback: (req, res, session) => {
-        const claims = jose.decodeJwt(session.id_token); // using jose library to decode JWT
-        console.log("CLAIMS: ", claims);
-        return session;
-      }
-  };
+  baseURL: `http://localhost:${PORT}`,
+  clientID: `${CLIENT_ID}`,
+  clientSecret: `${CLIENT_SECRET}`,
+  secret: `${SECRET}`,
+  issuerBaseURL: `https://${C_DOMAIN}`,
+  auth0Logout: true, 
+  // idpLogout: true,
+  authRequired: false,
+  authorizationParams: {
+    response_type: 'code',
+    audience: `test-general-nodeAPI`,
+    scope: 'openid email profile offline_access read:users',
+  },
+  // routes: {
+  //   login: false,
+  //   callback: '/callback',
+  //   logout: '/logout'
+  // }, 
+  // session: {
+  //   name: 'apple',
+  //   absoluteDuration: 3,
+  //   rollingDuration: 3
+  // }, 
+  // afterCallback: (req, res, session) => {
+  //   const claims = jose.decodeJwt(session.id_token); // using jose library to decode JWT
+  //   // console.log("CLAIMS: ", claims);
+  //   return session;
+  // }
+};
   
 
 // Middleware
@@ -59,5 +60,5 @@ app.use('/', homeController)
 
 //Listener 
 app.listen(PORT, () => {
-    console.log('listening on port: ', PORT)
+    console.log('listening on http://localhost:' + PORT)
 })
